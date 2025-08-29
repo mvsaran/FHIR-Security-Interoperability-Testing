@@ -28,7 +28,33 @@ Interoperability testing ensures that:
 ---
 
 ## 📁 Folder Structure
-FHIR-SECURITY-TESTING/ ├── appointment/ │ └── appointmentAPI.js ├── condition/ │ └── conditionAPI.js ├── encounter/ │ └── securityAPI.js ├── observation/ │ └── observationAPI.js ├── patient/ │ ├── patientAPI.js │ └── patient_schema.js ├── fixtures/ │ └── malicious_payloads.json ├── schemas/ │ └── patient-schema.json ├── support/ │ ├── commands.js │ └── e2e.js ├── cypress.config.js ├── package.json └── README.md
+
+```
+FHIR-SECURITY-TESTING/
+├── appointment/
+│   └── appointmentAPI.js
+├── condition/
+│   └── conditionAPI.js
+├── encounter/
+│   └── securityAPI.js
+├── observation/
+│   └── observationAPI.js
+├── patient/
+│   ├── patientAPI.js
+│   └── patient_schema.js
+├── fixtures/
+│   └── malicious_payloads.json
+├── schemas/
+│   └── patient-schema.json
+├── support/
+│   ├── commands.js
+│   └── e2e.js
+├── cypress.config.js
+├── package.json
+└── README.md
+```
+
+---
 
 ## 🧪 Test Coverage
 
@@ -36,20 +62,29 @@ FHIR-SECURITY-TESTING/ ├── appointment/ │ └── appointmentAPI.js �
 - ✅ SQL injection payloads
 - ✅ Malformed POST requests
 - ✅ Schema validation
-  
+
 ---
+
 ## 🚀 Setup Instructions
+
 ### 1️⃣ Install Dependencies
 
 ```bash
 npm install
-2️⃣Install Allure Reporter
+```
+
+### 2️⃣ Install Allure Reporter
+
+```bash
 npm install -D @shelex/cypress-allure-plugin
 npm install -g allure-commandline --save-dev
-3️⃣ Configure Cypress for Allure
-Update cypress.config.js:
+```
 
-js
+### 3️⃣ Configure Cypress for Allure
+
+Update **cypress.config.js**:
+
+```js
 const { defineConfig } = require('cypress');
 const allureWriter = require('@shelex/cypress-allure-plugin/writer');
 
@@ -61,28 +96,40 @@ module.exports = defineConfig({
     },
   },
 });
+```
 
-Update support/e2e.js:
+Update **support/e2e.js**:
+
+```js
 import '@shelex/cypress-allure-plugin';
+```
 
-🧪 Run Tests
+---
 
+### 🧪 Run Tests
+
+```bash
 npx cypress run
+```
 
-📊 Generate Allure Report
+### 📊 Generate Allure Report
 
+```bash
 allure generate allure-results --clean
 allure open
+```
 
-📖 References
-HL7 FHIR Spec
+---
 
-HAPI FHIR Server
+## 📖 References
 
-Cypress Docs
+- [HL7 FHIR Spec](https://hl7.org/fhir/)
+- [HAPI FHIR Server](http://hapi.fhir.org/)
+- [Cypress Docs](https://docs.cypress.io/)
+- [Allure Plugin](https://github.com/Shelex/cypress-allure-plugin)
 
-Allure Plugin
+---
 
-👨‍⚕️ Author
+## 👨‍⚕️ Author
 
-Saran Kumar
+**Saran Kumar**
