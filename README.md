@@ -1,43 +1,88 @@
+# 🛡️ FHIR Security & Interoperability Testing
 
-# AI-Enhanced Security & Interoperability Testing (FHIR) - Demo
+This project focuses on **automated testing of FHIR APIs** to ensure both **security** and **interoperability** across healthcare systems. It uses **Cypress** for test automation and integrates **Allure Reports** for rich test insights.
 
-This demo project provides Cypress-based interoperability & security tests against the **public HAPI FHIR server** (`http://hapi.fhir.org/baseR4`).
+---
 
-> Note: Public HAPI is a shared testing server. Data may be reset or vary. Use for demos and experimentation only.
+## 🔐 What is Security Testing?
 
-## What's included
-- Cypress tests:
-  - `cypress/e2e/patient_schema.cy.js` - fetches a Patient and validates basic JSON schema with Ajv
-  - `cypress/e2e/security.cy.js` - sends malformed/malicious payloads and observes responses
-- Minimal JSON Schema for Patient in `cypress/schemas/patient-schema.json`
-- Example malicious payloads in `cypress/fixtures/malicious_payloads.json`
-- `cypress.config.js` preconfigured with `baseUrl` = `http://hapi.fhir.org/baseR4`
+Security testing ensures that the FHIR API:
+- Rejects unauthorized access
+- Handles malformed or malicious payloads safely
+- Prevents vulnerabilities like SQL injection and XSS
+- Validates authentication and role-based access
 
-## Prerequisites
-- Node.js (16+)
-- npm
-- Internet access (to call public HAPI server)
+> In this project, we simulate attacks and validate safe API behavior using Cypress tests and payload injection scenarios.
 
-## Setup
-1. Clone or extract the project
-2. Install dependencies:
+---
+
+## 🔄 What is Interoperability Testing?
+
+Interoperability testing ensures that:
+- FHIR resources can be exchanged between different systems
+- Data integrity is preserved across transfers
+- Resource formats conform to FHIR standards
+
+> We validate resource creation, export, import, and round-trip consistency across multiple FHIR servers.
+
+---
+
+## 📁 Folder Structure
+FHIR-SECURITY-TESTING/ ├── appointment/ │ └── appointmentAPI.js ├── condition/ │ └── conditionAPI.js ├── encounter/ │ └── securityAPI.js ├── observation/ │ └── observationAPI.js ├── patient/ │ ├── patientAPI.js │ └── patient_schema.js ├── fixtures/ │ └── malicious_payloads.json ├── schemas/ │ └── patient-schema.json ├── support/ │ ├── commands.js │ └── e2e.js ├── cypress.config.js ├── package.json └── README.md
+
+## 🧪 Test Coverage
+
+- ✅ Patient search without auth
+- ✅ SQL injection payloads
+- ✅ Malformed POST requests
+- ✅ Schema validation
+  
+---
+## 🚀 Setup Instructions
+### 1️⃣ Install Dependencies
+
 ```bash
 npm install
-```
+2️⃣Install Allure Reporter
+npm install -D @shelex/cypress-allure-plugin
+npm install -g allure-commandline --save-dev
+3️⃣ Configure Cypress for Allure
+Update cypress.config.js:
 
-3. Run Cypress (interactive):
-```bash
-npx cypress open
-```
-Or run headless:
-```bash
+js
+const { defineConfig } = require('cypress');
+const allureWriter = require('@shelex/cypress-allure-plugin/writer');
+
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      allureWriter(on, config);
+      return config;
+    },
+  },
+});
+
+Update support/e2e.js:
+import '@shelex/cypress-allure-plugin';
+
+🧪 Run Tests
+
 npx cypress run
-```
 
-## Notes & Tips
-- Public HAPI may return different status codes for POSTs; tests are written leniently to accept a range of possible responses.
-- For a more controlled demo, run a local HAPI FHIR server and change `baseUrl` in `cypress.config.js` to `http://localhost:8080/fhir`.
-- Do not use real PHI data in public servers.
+📊 Generate Allure Report
 
-## License
-MIT
+allure generate allure-results --clean
+allure open
+
+📖 References
+HL7 FHIR Spec
+
+HAPI FHIR Server
+
+Cypress Docs
+
+Allure Plugin
+
+👨‍⚕️ Author
+
+Saran Kumar
