@@ -31,25 +31,35 @@ Interoperability testing ensures that:
 
 ```
 FHIR-SECURITY-TESTING/
-├── appointment/
-│   └── appointmentAPI.js
-├── condition/
-│   └── conditionAPI.js
-├── encounter/
-│   └── securityAPI.js
-├── observation/
-│   └── observationAPI.js
-├── patient/
-│   ├── patientAPI.js
-│   └── patient_schema.js
-├── fixtures/
-│   └── malicious_payloads.json
-├── schemas/
-│   └── patient-schema.json
-├── support/
-│   ├── commands.js
-│   └── e2e.js
+├── allure-report/
+├── allure-results/
+├── cypress/
+│   ├── .github/
+│   │   └── workflows/
+│   │       └── ci.yml
+│   ├── e2e/
+│   │   ├── appointment.cy.js
+│   │   ├── condition.cy.js
+│   │   ├── encounter.cy.js
+│   │   ├── medicationrequest.cy.js
+│   │   ├── observation.cy.js
+│   │   ├── patient_schema.cy.js
+│   │   └── security.cy.js
+│   ├── fixtures/
+│   │   └── malicious_payloads.json
+│   ├── reports/
+│   │   ├── allure-report/
+│   │   └── mochawesome/
+│   ├── schemas/
+│   │   └── patient-schema.json
+│   ├── screenshots/
+│   └── support/
+│       ├── commands.js
+│       └── e2e.js
+├── node_modules/
+├── .gitignore
 ├── cypress.config.js
+├── package-lock.json
 ├── package.json
 └── README.md
 ```
