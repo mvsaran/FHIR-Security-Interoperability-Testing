@@ -1,0 +1,21 @@
+{
+  "name": "ai-security-fhir-testing",
+  "version": "1.0.0",
+  "description": "Demo project: AI-Enhanced Security & Interoperability Testing against public HAPI FHIR server using Cypress",
+  "scripts": {
+    "test:cypress": "cypress run",
+    "open:cypress": "cypress open",
+    "test:allure": "cypress run --env allure=true",
+    "allure:generate": "allure generate cypress/reports/allure-results --clean -o cypress/reports/allure-report",
+    "allure:open": "allure open cypress/reports/allure-report"
+  },
+  "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.41.2",
+    "ajv": "^8.12.0",
+    "allure-commandline": "^2.34.1",
+    "cypress": "^13.17.0",
+    "cypress-mochawesome-reporter": "^4.0.2"
+  },
+  "author": "",
+  "license": "MIT"
+}

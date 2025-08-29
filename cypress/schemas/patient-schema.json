@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Patient (minimal)",
+  "type": "object",
+  "required": [
+    "resourceType",
+    "id"
+  ],
+  "properties": {
+    "resourceType": {
+      "const": "Patient"
+    },
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "family": {
+            "type": "string"
+          },
+          "given": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "gender": {
+      "type": "string"
+    },
+    "birthDate": {
+      "type": "string"
+    }
+  }
+}

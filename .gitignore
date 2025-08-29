@@ -1,0 +1,9 @@
+node_modules/
+cypress/reports/
+allure-report/
+allure-results/
+coverage/
+.env
+.DS_Store
+.vscode/
+npm-debug.log

@@ -1,0 +1,26 @@
+[
+  {
+    "resourceType": "Patient",
+    "id": "123; DROP TABLE users;",
+    "name": [
+      {
+        "family": "<script>alert(1)</script>",
+        "given": [
+          "X"
+        ]
+      }
+    ]
+  },
+  {
+    "resourceType": "Patient",
+    "id": "1 OR 1=1",
+    "name": [
+      {
+        "family": "InjectionTest",
+        "given": [
+          "Y"
+        ]
+      }
+    ]
+  }
+]
