@@ -22,8 +22,10 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Run Cypress Tests with Allure
-        run: npm run test:allure
+      - name: Run Cypress Tests with Allure (record to Dashboard)
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+        run: npm run test:allure -- --record --key $CYPRESS_RECORD_KEY
 
       - name: Generate Allure Report
         run: npm run allure:generate
