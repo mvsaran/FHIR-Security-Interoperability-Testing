@@ -10,6 +10,11 @@ jobs:
   cypress-tests:
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2]   # 🔥 Run 2 parallel jobs, increase this number if you want more parallelization
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -22,15 +27,17 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Run Cypress Tests with Allure (record to Dashboard)
+      - name: Run Cypress Tests with Allure (parallel + record)
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-        run: npm run test:allure -- --record --key $CYPRESS_RECORD_KEY
+        run: npm run test:allure -- --record --key $CYPRESS_RECORD_KEY --parallel --ci-build-id ${{ github.run_id }}
 
       - name: Generate Allure Report
+        if: matrix.containers == 1   # ⚡ only generate report once, not in every parallel container
         run: npm run allure:generate
 
       - name: Upload Allure Report as Artifact
+        if: matrix.containers == 1   # ⚡ only upload once
         uses: actions/upload-artifact@v3
         with:
           name: allure-report
